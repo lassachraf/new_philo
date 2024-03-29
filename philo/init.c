@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 00:45:53 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/03/29 03:26:20 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/03/29 04:07:18 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,12 @@ void	*philo_life(void *data)
 	t_philo	*philo;
 
 	philo = (t_philo *)data;
-        sleeping(philo);
-        thinking(philo);
-        usleep(10000);
-    printf("Philo\n");
+	while (1)
+	{
+		// eating(philo);
+		sleeping(philo);
+		thinking(philo);
+	}
 	return (NULL);
 }
 
@@ -34,11 +36,13 @@ int	init_philos(t_philo *philos, t_fork *forks, t_info *info)
 		philos[id].id = id + 1;
 		philos[id].meals_eaten = 0;
 		philos[id].state = 0;
+		philos[id].time_to_die = info->time_to_die;
+		philos[id].time_to_eat = info->time_to_eat;
+		philos[id].time_to_sleep = info->time_to_sleep;
+        philos[id].time_to_start = get_time();
 		if (pthread_create(&philos[id].thread, NULL, &philo_life,
 				&philos[id]) != 0)
 			return (-1);
-        printf("rah sala creation\n");
-		pthread_join(philos[id].thread, NULL);
 		if (id % 2 == 0)
 		{
 			philos[id].first_fork = &forks[id];
@@ -49,7 +53,6 @@ int	init_philos(t_philo *philos, t_fork *forks, t_info *info)
 			philos[id].first_fork = &forks[info->philo_number - id];
 			philos[id].second_fork = &forks[id];
 		}
-        printf("Philo n = %d finished\n", philos[id].id);
 	}
 	return (0);
 }
@@ -77,6 +80,8 @@ int	init_data(t_info *info, t_philo *philos, t_fork *forks)
 		return (-1);
 	if (init_philos(philos, forks, info) != 0)
 		return (-1);
-	printf("init is finished\n");
+	i = -1;
+	while (++i < info->philo_number)
+		pthread_join(philos[i].thread, NULL);
 	return (0);
 }

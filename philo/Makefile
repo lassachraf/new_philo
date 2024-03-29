@@ -6,7 +6,7 @@
 #    By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/28 22:09:47 by alassiqu          #+#    #+#              #
-#    Updated: 2024/03/29 03:10:18 by alassiqu         ###   ########.fr        #
+#    Updated: 2024/03/29 04:07:55 by alassiqu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ HEADER	= philo.h
 
 RM		= rm -f
 
-SRCS	= parsing.c errors.c utils.c init.c safe_functions.c routine.c
+SRCS	= parsing.c errors.c utils.c init.c safe_functions.c routine.c time_functions.c
 
 OBJS	= $(SRCS:.c=.o)
 

@@ -6,14 +6,14 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 01:14:16 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/03/29 01:35:05 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/03/29 03:56:10 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	thread_errors(int status)
-{
-	if (status == 0)
-		return (0);
-}
+// void	thread_errors(int status)
+// {
+// 	if (status == 0)
+// 		return (0);
+// }

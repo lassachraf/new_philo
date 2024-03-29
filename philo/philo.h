@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 22:40:34 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/03/29 03:21:23 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/03/29 04:09:29 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # endif
 
 # include <limits.h>
+# include <sys/time.h>
 # include <pthread.h>
 # include <stdbool.h>
 # include <stdio.h>
@@ -45,6 +46,11 @@ typedef struct s_philo
 	int					id;
 	int					meals_eaten;
 	int					state;
+	size_t				time_to_die;
+	size_t				time_to_eat;
+	size_t				time_to_sleep;
+	size_t				time_to_start;
+	size_t				last_meal_time;
 	pthread_t			thread;
 	t_info				*info;
 	t_fork				*first_fork;
@@ -78,12 +84,13 @@ void					free_and_cleanup(t_info *info);
 
 // Actions functions :
 // void                    eat(t_philo *philo);
-void                    sleeping(t_philo *philo);
-void                    thinking(t_philo *philo);
+void					sleeping(t_philo *philo);
+void					thinking(t_philo *philo);
 // void                    die(t_philo *philo);
 // void                    meals(t_philo *philo);
 
 // Main function :
+long	get_time(void);
 
 // Error functions :
 void					arg_error(void);
